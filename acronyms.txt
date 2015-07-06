@@ -1,0 +1,23 @@
+
+         Acronyms & Abbreviations
+-----------------------------------------
+-----------------------------------------
+AES     | Advanced Encryption Standard
+CSRF    | Cross-Site Request Forgery
+DB      | Database
+DBMS    | Database Management System
+DES     | Data Encryption Standard
+DoS     | Denial of Service
+HTML    | Hyper Text Markup Language
+HTTP    | Hyper Text Transfer Protocol
+IoE     | Internet of Everything
+LDAP    | Lightweight Directory Access Protocol
+MITM    | Man in the Middle
+NOP     | No Operation
+OEM     | Original Equipment Manufacturer
+OWASP   | Open Web Application Security Project
+TLA     | Three Letter Acronym
+TPS     | Third Party Software
+VPN     | Virtual Private Network
+XSRF    | Cross-Site Request Forgery
+XSS     | Cross-Site Scripting
