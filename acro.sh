@@ -3,7 +3,7 @@
 # The point of this is to look up an acronym from an acronym file and display
 # what it is
 
-#Get the directory of the acro,sh file regardless of symlinks
+#Get the directory of the acro.sh file regardless of symlinks
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h $SOURCE ]; do 
     DIR="$( cd -P "$( dirname "SOURCE" )" && pwd )"
@@ -23,6 +23,11 @@ function usage()
     echo 
     echo Add acronym with \'acro add\'
     echo List all acronyms with \'acro all\'
+}
+
+function letter_list()
+{
+    echo This should list all acronyms starting with a letter
 }
 
 function add_acronym()
@@ -53,23 +58,32 @@ if [ ! -f "$ACRO_FILE" ]; then
     exit
 fi
 
-while getopts "Aa:c:" opt;do
+while getopts ":Aal:" opt;do
     case $opt in
         A)
             echo "A(All) flag was triggered"
             less $ACRO_FILE
             ;;
         a)
-            echo a flag was triggered
+            echo "a flag was triggered"
+            add_acronym
             ;;
-        c)
-            echo c flag was triggerd
+        l)
+            echo l flag was triggerd
+            echo this will find all acronyms that start with the letter $OPTARG
+            #Should make sure OPTARG is a single letter
+            letter_list $OPTARG
             ;;
         \?)
             echo invalid option!!
             ;;
     esac
+    echo $OPTIND
 done
+
+if [ $OPTIND -eq 1 -a $# -eq 1 ];then
+    find_acronym $1
+fi
 #case $1 in
 #    all | All)
 #        less $ACRO_FILE
