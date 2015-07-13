@@ -53,15 +53,32 @@ if [ ! -f "$ACRO_FILE" ]; then
     exit
 fi
 
-case $1 in
-    all | All)
-        less $ACRO_FILE
-        ;;
-    add | Add)
-        add_acronym
-        ;;
-    *)
-        find_acronym $1
-        ;;
-esac
+while getopts "Aa:c:" opt;do
+    case $opt in
+        A)
+            echo "A(All) flag was triggered"
+            less $ACRO_FILE
+            ;;
+        a)
+            echo a flag was triggered
+            ;;
+        c)
+            echo c flag was triggerd
+            ;;
+        \?)
+            echo invalid option!!
+            ;;
+    esac
+done
+#case $1 in
+#    all | All)
+#        less $ACRO_FILE
+#        ;;
+#    add | Add)
+#        add_acronym
+#        ;;
+#    *)
+#        find_acronym $1
+#        ;;
+#esac
 
