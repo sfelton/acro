@@ -27,7 +27,9 @@ function usage()
 
 function letter_list()
 {
-    echo This should list all acronyms starting with a letter
+    echo Letter = $1
+    grep -i "^$1\w*" $ACRO_FILE
+
 }
 
 function add_acronym()
@@ -69,10 +71,7 @@ while getopts ":Aal:" opt;do
             add_acronym
             ;;
         l)
-            echo l flag was triggerd
-            echo this will find all acronyms that start with the letter $OPTARG
-            #Should make sure OPTARG is a single letter
-            letter_list $OPTARG
+            letter_list $(echo $OPTARG | head -c 1)
             ;;
         \?)
             echo invalid option!!
