@@ -27,9 +27,7 @@ function usage()
 
 function letter_list()
 {
-    echo Letter = $1
     grep -i "^$1\w*" $ACRO_FILE
-
 }
 
 function add_acronym()
@@ -77,7 +75,6 @@ while getopts ":Aal:" opt;do
             echo invalid option!!
             ;;
     esac
-    echo $OPTIND
 done
 
 if [ $OPTIND -eq 1 -a $# -eq 1 ];then
