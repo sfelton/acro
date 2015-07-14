@@ -61,11 +61,9 @@ fi
 while getopts ":Aal:" opt;do
     case $opt in
         A)
-            echo "A(All) flag was triggered"
             less $ACRO_FILE
             ;;
         a)
-            echo "a flag was triggered"
             add_acronym
             ;;
         l)
