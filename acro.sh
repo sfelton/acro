@@ -1,7 +1,6 @@
 #!/bin/bash 
 
-# The point of this is to look up an acronym from an acronym file and display
-# what it is
+FILENAME="acronyms.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
 SOURCE="${BASH_SOURCE[0]}"
@@ -12,7 +11,7 @@ while [ -h $SOURCE ]; do
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-ACRO_FILE="$DIR/acronyms.txt"
+ACRO_FILE="$DIR/$FILENAME"
 MAX_LINES=$(tput lines)
 
 #Functions
