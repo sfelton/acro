@@ -1,5 +1,9 @@
 #!/bin/bash 
 
+#TODO
+# Add -h flag to display usage
+# Probably fix usage up a little to be usefule
+
 FILENAME="acronyms.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
@@ -51,21 +55,42 @@ function find_acronym()
     fi
 }
 
-#Make sure that the acro file actually exsists
-if [ ! -f "$ACRO_FILE" ]; then
-    echo $ACRO_FILE does not exsist
-    exit
-fi
+function create_acronym_file()
+{
+    echo Creating $FILENAME at $DIR
+    echo "          Acronyms & Abbreviations" > $ACRO_FILE
+    echo "-----------------------------------------" >> $ACRO_FILE
+    echo "-----------------------------------------" >> $ACRO_FILE
+}
 
-while getopts ":Aal:" opt;do
+function exit_if_file_doesnt_exsist()
+{
+    if [ ! -f "$ACRO_FILE" ]; then
+        echo $ACRO_FILE does not exsist
+        echo you can create it using 'acro -c'
+        exit
+    fi
+}
+
+while getopts ":Aacl:" opt;do
     case $opt in
         A)
+            exit_if_file_doesnt_exsist
             less $ACRO_FILE
             ;;
         a)
+            exit_if_file_doesnt_exsist
             add_acronym
             ;;
+        c)
+            if [ -f "$ACRO_FILE" ]; then
+                echo "$ACRO_FILE" already exsists
+                exit
+            fi
+            create_acronym_file
+            ;;
         l)
+            exit_if_file_doesnt_exsist
             letter_list $(echo $OPTARG | head -c 1)
             ;;
         \?)
