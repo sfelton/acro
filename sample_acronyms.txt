@@ -3,6 +3,8 @@
 -----------------------------------------
 -----------------------------------------
 AES     | Advanced Encryption Standard
+BU      | Buisness Unit
+COBC    | Code of Buisness Conduct
 CSRF    | Cross-Site Request Forgery
 DB      | Database
 DBMS    | Database Management System

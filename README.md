@@ -23,6 +23,15 @@ $acro tla
 TLA     | Three Letter Acronym
 ```
 
+To display only exact word matches (skip any patial matches), use the `-e` flag
+```sh
+$ acro BU
+BU      | Buisness Unit
+COBC    | Code of Buisness Conduct
+$ acro -e BU
+BU      | Buisness Unit
+```
+
 The `-l` flag will let you search for all acronyms starting with a specific letter
 ```sh
 $ arco -l D
