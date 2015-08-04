@@ -72,7 +72,7 @@ function exit_if_file_doesnt_exsist()
     fi
 }
 
-while getopts ":Aacl:" opt;do
+while getopts ":Aae:cl:" opt;do
     case $opt in
         A)
             exit_if_file_doesnt_exsist
@@ -88,6 +88,9 @@ while getopts ":Aacl:" opt;do
                 exit
             fi
             create_acronym_file
+            ;;
+        e)
+            fgrep -i -w $OPTARG $ACRO_FILE
             ;;
         l)
             exit_if_file_doesnt_exsist
