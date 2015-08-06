@@ -21,11 +21,13 @@ MAX_LINES=$(tput lines)
 #Functions
 function usage()
 {
-    echo Provide acronym to look up
-    echo    ex. acro TLA
-    echo 
-    echo Add acronym with \'acro add\'
-    echo List all acronyms with \'acro all\'
+    echo "Usage: acor [ option ] search-string"
+    echo "Flags: -A          print all acronyms"
+    echo "       -a          prompt to add a new acronym to list"
+    echo "       -c          create acronym file if it doesn't exsist"
+    echo "       -e <search> only show exact matches"
+    echo "       -h          show this help"
+    echo "       -l <letter> list all acronyms starting with that letter"
 }
 
 function letter_list()
@@ -72,7 +74,7 @@ function exit_if_file_doesnt_exsist()
     fi
 }
 
-while getopts ":Aae:cl:" opt;do
+while getopts ":Aae:hcl:" opt;do
     case $opt in
         A)
             exit_if_file_doesnt_exsist
@@ -91,6 +93,9 @@ while getopts ":Aae:cl:" opt;do
             ;;
         e)
             fgrep -i -w $OPTARG $ACRO_FILE
+            ;;
+        h)
+            usage
             ;;
         l)
             exit_if_file_doesnt_exsist
