@@ -1,9 +1,5 @@
 #!/bin/bash 
 
-#TODO
-# Add -h flag to display usage
-# Probably fix usage up a little to be usefule
-
 FILENAME="acronyms.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
@@ -21,7 +17,7 @@ MAX_LINES=$(tput lines)
 #Functions
 function usage()
 {
-    echo "Usage: acor [ option ] search-string"
+    echo "Usage: acro [ option ] search-string"
     echo "Flags: -A          print all acronyms"
     echo "       -a          prompt to add a new acronym to list"
     echo "       -c          create acronym file if it doesn't exsist"
