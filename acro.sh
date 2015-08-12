@@ -1,5 +1,15 @@
 #!/bin/bash 
 
+#TODO
+#Add different output flags/options
+#  -Only exact matches  (-e)
+#  -All matches         (default atm)
+#  -Exact matches first
+#  -Only acronym matches
+#  -Only word matches
+#
+#Add ability to group acronyms (for projects)
+
 FILENAME="acronyms.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
