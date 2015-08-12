@@ -7,8 +7,6 @@
 #  -Exact matches first
 #  -Only acronym matches
 #  -Only word matches
-#
-#Add ability to group acronyms (for projects)
 
 FILENAME="acronyms.txt"
 
@@ -48,6 +46,19 @@ function add_acronym()
     printf "%-8s| " $ACRO >> $ACRO_FILE
     echo $MEANING >> $ACRO_FILE
     sort $ACRO_FILE --output=$ACRO_FILE
+}
+
+function find_acronym_top_first()
+{
+
+    count=$(fgrep --ignore-case --count $1 $ACRO_FILE)
+    exact_count=$(fgrep --ignore-case --count -w $1 $ACRO_FILE)
+    
+    if [ $exact_count -gt 0 -a $count -ne $exact_count ];then
+        fgrep -i -w $1 $ACRO_FILE
+        echo -------------------------------------------------------------
+    fi
+    fgrep --ignore-case $1 $ACRO_FILE
 }
 
 function find_acronym()
@@ -113,17 +124,6 @@ while getopts ":Aae:hcl:" opt;do
 done
 
 if [ $OPTIND -eq 1 -a $# -eq 1 ];then
-    find_acronym $1
+    find_acronym_top_first $1
 fi
-#case $1 in
-#    all | All)
-#        less $ACRO_FILE
-#        ;;
-#    add | Add)
-#        add_acronym
-#        ;;
-#    *)
-#        find_acronym $1
-#        ;;
-#esac
 
