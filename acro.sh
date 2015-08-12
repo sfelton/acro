@@ -45,7 +45,6 @@ function add_acronym()
 {
     read -p "What is the ACRONYM? " ACRO
     read -p "What is the MEANING? " MEANING
-    cp -f $ACRO_FILE $ACRO_FILEi.backup
     printf "%-8s| " $ACRO >> $ACRO_FILE
     echo $MEANING >> $ACRO_FILE
     sort $ACRO_FILE --output=$ACRO_FILE
