@@ -1,12 +1,8 @@
-#!/bin/bash 
+#!/usr/bin/env bash 
 
 #TODO
-#Add different output flags/options
-#  -Only exact matches  (-e)
-#  -All matches         (default atm)
-#  -Exact matches first
-#  -Only acronym matches
-#  -Only word matches
+# -Add status option
+# -Add functionality for different acronym lists
 
 FILENAME="acronyms.txt"
 
@@ -92,14 +88,17 @@ function exit_if_file_doesnt_exsist()
 
 while getopts ":Aae:hcl:" opt;do
     case $opt in
+        #All
         A)
             exit_if_file_doesnt_exsist
             less $ACRO_FILE
             ;;
+        #Add an acronym
         a)
             exit_if_file_doesnt_exsist
             add_acronym
             ;;
+        #Create acronym list
         c)
             if [ -f "$ACRO_FILE" ]; then
                 echo "$ACRO_FILE" already exsists
@@ -107,12 +106,15 @@ while getopts ":Aae:hcl:" opt;do
             fi
             create_acronym_file
             ;;
+        #Show only exact matches
         e)
             fgrep -i -w $OPTARG $ACRO_FILE
             ;;
+        #show Help message
         h)
             usage
             ;;
+        #Show all acronyms starting with a letter
         l)
             exit_if_file_doesnt_exsist
             letter_list $(echo $OPTARG | head -c 1)
