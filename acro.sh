@@ -1,9 +1,9 @@
 #!/usr/bin/env bash 
 
 #TODO
-# -Add status option
 # -Add functionality for different acronym lists
 
+VERSION=0.5
 FILENAME="acronyms.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
@@ -28,6 +28,7 @@ function usage()
     echo "       -e <search> only show exact matches"
     echo "       -h          show this help"
     echo "       -l <letter> list all acronyms starting with that letter"
+    echo "       -s          show current status of acro"
 }
 
 function letter_list()
@@ -86,7 +87,24 @@ function exit_if_file_doesnt_exsist()
     fi
 }
 
-while getopts ":Aae:hcl:" opt;do
+function show_status()
+{
+    echo "acro v$VERSION"
+    echo "=============="
+    echo "Current acro list: $FILENAME"
+    echo "=============="
+    echo "Available acro lists:"
+    basename $(ls -c1 -1 $DIR/*.txt)
+}
+
+#Check if there are no arguments
+if (($# == 0));then
+    show_status
+    echo
+    usage
+fi
+
+while getopts ":Aae:hcl:s" opt;do
     case $opt in
         #All
         A)
@@ -118,6 +136,10 @@ while getopts ":Aae:hcl:" opt;do
         l)
             exit_if_file_doesnt_exsist
             letter_list $(echo $OPTARG | head -c 1)
+            ;;
+        #Show status
+        s)
+            show_status
             ;;
         \?)
             echo invalid option!!
