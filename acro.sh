@@ -2,6 +2,7 @@
 
 #TODO
 # -Add functionality for different acronym lists
+# -Pull acronym list from a remote location
 
 VERSION=0.5
 FILENAME="acronyms.txt"
@@ -92,6 +93,8 @@ function show_status()
     echo "acro v$VERSION"
     echo "=============="
     echo "Current acro list: $FILENAME"
+    # Subtract 4 to account for the 4 lines at the top of the file
+    echo "  # of acronyms: $(($(wc -l acronyms.txt | cut -d" " -f6)-4))"
     echo "=============="
     echo "Available acro lists:"
     basename $(ls -c1 -1 $DIR/*.txt)
