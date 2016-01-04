@@ -6,6 +6,7 @@
 
 VERSION=0.5
 FILENAME="acronyms.txt"
+#FILENAME="OSWP.txt"
 
 #Get the directory of the acro.sh file regardless of symlinks
 SOURCE="${BASH_SOURCE[0]}"
@@ -94,7 +95,7 @@ function show_status()
     echo "=============="
     echo "Current acro list: $FILENAME"
     # Subtract 4 to account for the 4 lines at the top of the file
-    echo "  # of acronyms: $(($(wc -l <  acronyms.txt)-4))"
+    echo "  # of acronyms: $(($(wc -l < acronyms.txt)-4))"
     echo "=============="
     echo "Available acro lists:"
     basename $(ls -c1 -1 $DIR/*.txt)
