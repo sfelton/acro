@@ -6,7 +6,8 @@
 
 VERSION=0.5
 FILENAME="acronyms.txt"
-#FILENAME="OSWP.txt"
+SPELLCHECKER="aspell"
+SPELLCHECKER_FLAGS="list"
 
 #Get the directory of the acro.sh file regardless of symlinks
 SOURCE="${BASH_SOURCE[0]}"
@@ -42,6 +43,7 @@ function add_acronym()
 {
     read -p "What is the ACRONYM? " ACRO
     read -p "What is the MEANING? " MEANING
+    check_spelling $MEANING
     printf "%-8s| " $ACRO >> $ACRO_FILE
     echo $MEANING >> $ACRO_FILE
     sort $ACRO_FILE --output=$ACRO_FILE
@@ -99,6 +101,20 @@ function show_status()
     echo "=============="
     echo "Available acro lists:"
     basename $(ls -c1 -1 $DIR/*.txt)
+}
+
+function check_spelling()
+{
+    if [ -z $SPELLCHECKER ]; then
+        return 0
+    fi
+
+    if ! type $SPELLCHECKER &> /dev/null; then
+        echo "Spell checker '$SPELLCHECKER' not found"
+    fi
+
+    echo $1 | $SPELLCHECKER $SPELLCHECKER_FLAGS
+
 }
 
 #Check if there are no arguments
