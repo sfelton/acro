@@ -41,8 +41,17 @@ function letter_list()
 
 function add_acronym()
 {
-    read -p "What is the ACRONYM? " ACRO
-    read -p "What is the MEANING? " MEANING
+    if [ -z "$1" ]; then
+        read -p "What is the ACRONYM? " ACRO
+    else
+        ACRO=$1
+    fi
+
+    if [ -z "$2" ]; then
+        read -p "What is the MEANING? " MEANING
+    else
+        MEANING=$2
+    fi
     check_spelling $MEANING
     printf "%-8s| " $ACRO >> $ACRO_FILE
     echo $MEANING >> $ACRO_FILE
@@ -134,7 +143,7 @@ while getopts ":Aae:hcl:s" opt;do
         #Add an acronym
         a)
             exit_if_file_doesnt_exsist
-            add_acronym
+            add_acronym "$2" "$3"
             ;;
         #Create acronym list
         c)
